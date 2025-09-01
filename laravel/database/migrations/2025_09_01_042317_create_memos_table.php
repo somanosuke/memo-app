@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(!Schema::hasTable('memos')){
             Schema::create('memos', function (Blueprint $table) {
                 $table->id();
                 $table->text('content');
                 $table->timestamps();
             });
-        }
     }
 
     /**
