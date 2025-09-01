@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Route;
 /**********************************************************************
  * ルーティング
  ***********************************************************************/
-Route::get('/{any}', function () {
+Route::get('/', function () {
+    return view('index');
+});
+Route::get('/app', function () {
     return view('app');
-})->where('any', '.*');
+});
