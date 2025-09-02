@@ -3,7 +3,7 @@ import Icon from "./svgs/DocumentSvg.vue";
 </script>
 
 <template>
-  <div class="component-root border-b border-solid border-yellow-200 shadow-md bg-white">
+  <div class="component-root border-b border-solid border-yellow-200 shadow-md bg-white w-full">
     <div class="text pt-8 p-6">
       <div class="upper flex justify-center items-center gap-3">
         <Icon />
