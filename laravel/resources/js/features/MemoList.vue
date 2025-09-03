@@ -4,6 +4,7 @@ import MemoIcon from "../components/svgs/DocumentSvg.vue";
 import { computed } from "vue";
 
 interface Memo {
+  id: number;
   content: string;
   timestamp: string;
 } // defineProps に型だけ指定する
