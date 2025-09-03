@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Header from "../components/Header.vue";
 import Textarea from "../components/TextareaForm.vue";
+import Bottom from "../components/Bottom.vue";
 import MemoList from "../features/MemoList.vue";
 import { ref, onMounted } from "vue";
 import api from "@/bootstrap";
@@ -24,5 +25,6 @@ onMounted(() => {
     <Header />
     <Textarea @saved="getMemos" />
     <MemoList :memos="memos" />
+    <Bottom />
   </div>
 </template>
