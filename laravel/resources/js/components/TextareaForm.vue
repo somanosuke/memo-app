@@ -1,8 +1,17 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import Plus from "./svgs/PlusSvg.vue";
+import api from "@/bootstrap";
 
 const content = ref("");
+const emit = defineEmits(["saved"]);
+
+async function handleSubmit() {
+  // 非同期で POST
+  await api.post("/app/store", { content: content.value });
+  content.value = "";
+  emit("saved");
+}
 </script>
 
 <template>
@@ -13,7 +22,7 @@ const content = ref("");
       <Plus class="text-primary-500" />
       <p class="font-medium text-lg">新しいメモ</p>
     </div>
-    <form action="">
+    <form @submit.prevent="handleSubmit">
       <textarea
         name="content"
         id="content"
