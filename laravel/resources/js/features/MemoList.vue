@@ -26,6 +26,18 @@ const reversedMemos = computed(() => {
         {{ reversedMemos.length }}件
       </div>
     </div>
+    <transition-group name="add-memo" tag="div" class="flex flex-col gap-4">
+      <MemoCard
+        v-for="memo in reversedMemos"
+        :key="memo.id"
+        :content="memo.content"
+        :timestamp="memo.timestamp"
+        :id="memo.id"
+        @updated="$emit('updated')"
+      />
+    </transition-group>
+  </div>
+  <transition name="fade" mode="out-in">
     <div
       class="nothing-memo flex flex-col items-center mt-12 gap-2"
       v-if="reversedMemos.length === 0"
@@ -34,13 +46,39 @@ const reversedMemos = computed(() => {
       <p class="text-xl text-gray-600">まだメモがありません</p>
       <p class="text-sm text-gray-400">上の入力欄からメモを作成してみましょう！</p>
     </div>
-    <MemoCard
-      v-for="memo in reversedMemos"
-      :key="memo.id"
-      :content="memo.content"
-      :timestamp="memo.timestamp"
-      :id="memo.id"
-      @updated="$emit('updated')"
-    />
-  </div>
+  </transition>
 </template>
+<style scoped>
+.add-memo-leave-active {
+  transition: all 0.2s;
+}
+
+.add-memo-enter-active {
+  transition: all 0.3s;
+}
+
+.add-memo-move {
+  transition: transform 0.3s;
+}
+
+.add-memo-enter-from {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.add-memo-leave-to {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.3s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: scale(0.9);
+}
+</style>
