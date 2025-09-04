@@ -25,5 +25,8 @@ const features = [
       :title="feature.title"
       :description="feature.description"
     />
+    <a href="/app" class="p-4 bg-white rounded-xl shadow hover:shadow-lg transition duration-300"
+      ><p class="text-xl">メモアプリへ</p></a
+    >
   </div>
 </template>
