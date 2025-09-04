@@ -28,7 +28,7 @@ const isHover = ref(false);
     @mouseleave="isHover = false"
   >
     <div class="text">
-      <p class="text-lg font-normal">{{ props.content }}</p>
+      <p class="text-lg font-normal whitespace-pre-wrap">{{ props.content }}</p>
       <p class="text-md font-light text-gray-500">{{ props.timestamp }}</p>
     </div>
     <Trash class="trash-button cursor-pointer" v-if="isHover" @click="deleteMemo" />
