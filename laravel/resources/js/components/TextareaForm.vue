@@ -4,13 +4,15 @@ import Plus from "./svgs/PlusSvg.vue";
 import api from "@/bootstrap";
 
 const content = ref("");
-const emit = defineEmits(["saved"]);
+const emit = defineEmits(["updated"]);
 
 async function handleSubmit() {
   // 非同期で POST
-  await api.post("/app/store", { content: content.value });
+  await api.post("/app/store", { content: content.value }).then((res) => {
+    console.log(res.data.message);
+  });
   content.value = "";
-  emit("saved");
+  emit("updated");
 }
 </script>
 

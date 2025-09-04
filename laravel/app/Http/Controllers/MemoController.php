@@ -14,7 +14,9 @@ class MemoController extends Controller
             'content' => $request->input('content'),
         ]);
 
-        return redirect(route('memo'));
+        return response()->json([
+            'message' => 'Created successfully :)'
+        ], 200);
     }
 
     public function getMemos()
@@ -27,5 +29,14 @@ class MemoController extends Controller
             ];
         });
         return response()->json($memos);
+    }
+
+    public function delete(Request $request)
+    {
+        $memo = Memo::find($request['id']);
+        $memo->delete();
+        return response()->json([
+            'message' => 'Deleted successfully :)'
+        ], 200);
     }
 }

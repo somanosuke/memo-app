@@ -31,6 +31,8 @@ const reversedMemos = computed(() => {
       :key="memo.id"
       :content="memo.content"
       :timestamp="memo.timestamp"
+      :id="memo.id"
+      @updated="$emit('updated')"
     />
   </div>
 </template>
