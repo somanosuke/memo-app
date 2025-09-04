@@ -23,8 +23,8 @@ onMounted(() => {
     class="page-root bg-gradient-to-r from-amber-50 to-orange-100 pb-20 min-h-screen flex flex-col items-center gap-8"
   >
     <Header />
-    <Textarea @saved="getMemos" />
-    <MemoList :memos="memos" />
+    <Textarea @updated="getMemos" />
+    <MemoList :memos="memos" @updated="getMemos" />
     <Bottom />
   </div>
 </template>
