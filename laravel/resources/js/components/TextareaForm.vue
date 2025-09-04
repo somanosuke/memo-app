@@ -1,8 +1,17 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import Plus from "./svgs/PlusSvg.vue";
+import api from "@/bootstrap";
 
 const content = ref("");
+const emit = defineEmits(["saved"]);
+
+async function handleSubmit() {
+  // 非同期で POST
+  await api.post("/app/store", { content: content.value });
+  content.value = "";
+  emit("saved");
+}
 </script>
 
 <template>
@@ -13,7 +22,7 @@ const content = ref("");
       <Plus class="text-primary-500" />
       <p class="font-medium text-lg">新しいメモ</p>
     </div>
-    <form action="">
+    <form @submit.prevent="handleSubmit">
       <textarea
         name="content"
         id="content"
@@ -21,11 +30,13 @@ const content = ref("");
         v-model="content"
         placeholder="メモを入力してください... &#10; （Enterで保存、Shift+Enterで改行）"
         class="resize-none w-full leading-[1.75rem] p-3 mt-4 border border-gray-300 rounded-md outline-sky-200"
+        @keydown.enter.prevent="$event.shiftKey ? (content += '\n') : handleSubmit()"
       ></textarea>
       <button
         class="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-orange-500 to-red-500 rounded-xl mt-4 p-3 disabled:cursor-not-allowed disabled:bg-gradient-to-r disabled:from-orange-200 disabled:to-red-200"
-        :disabled="content.length === 0"
+        :disabled="content.trim().length === 0"
       >
+        <!--trim()で改行を削除することで改行のみでは送信できない-->
         <Plus class="text-white" />
         <p class="text-white font-medium text-lg">メモを保存</p>
       </button>

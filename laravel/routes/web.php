@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MemoController;
 use Illuminate\Support\Facades\Route;
 
 /**********************************************************************
@@ -15,4 +16,5 @@ Route::get('/', function () {
 });
 Route::get('/app', function () {
     return view('app');
-});
+})->name('memo');
+
