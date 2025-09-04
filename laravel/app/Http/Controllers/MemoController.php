@@ -25,7 +25,7 @@ class MemoController extends Controller
             return [
                 'id' => $memo->id,
                 'content' => $memo->content,
-                'timestamp' => $memo->created_at->format('Y/m/d H:i:s'),
+                'timestamp' => $memo->created_at->timezone('Asia/Tokyo')->format('Y/m/d H:i:s'),
             ];
         });
         return response()->json($memos);
