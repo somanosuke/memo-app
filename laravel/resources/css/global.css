@@ -1,0 +1,20 @@
+:root {
+    --color-bg: #FFFFFF;
+    --color-text: #111111;
+    --color-subtext: #414143;
+    --color-primary: #EA580C;
+    --color-secondary: #F97316;
+    --color-lightPrimary: #FFEDD5;
+    --color-lightSecondary: #FFFBEB;
+}
+
+/* ダークモード */
+.dark {
+    --color-bg: #2A2A2A;
+    --color-text: #EEEEEE;
+    --color-subtext: #AAAAAA;
+    --color-primary: #14B8A6;
+    --color-secondary: #06B6D4;
+    --color-lightPrimary: #27272a;
+    --color-lightSecondary: #18181b;
+}
