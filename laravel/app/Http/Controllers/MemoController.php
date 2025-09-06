@@ -4,17 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Memo;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateMemoRequest;
 
 class MemoController extends Controller
 {
     //
-    public function store(Request $request)
+    public function store(CreateMemoRequest $request)
     {
+        $validated = $request->validated();
+
         Memo::create([
-            'content' => $request->input('content'),
+            'content' => $validated['content'],
         ]);
 
-        return response()->json([
+        return response()->json([//成功を返す
             'message' => 'Created successfully :)'
         ], 200);
     }
