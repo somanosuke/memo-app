@@ -27,8 +27,10 @@ const isHover = ref(false);
     @mouseover="isHover = true"
     @mouseleave="isHover = false"
   >
-    <div class="text">
-      <p class="text-lg font-normal text-text whitespace-pre-wrap">{{ props.content }}</p>
+    <div class="text flex-1 max-w-[94%]">
+      <p class="text-lg font-normal text-text whitespace-pre-wrap max-w-full break-all">
+        {{ props.content }}
+      </p>
       <p class="text-md font-light text-subtext">{{ props.timestamp }}</p>
     </div>
     <Trash
