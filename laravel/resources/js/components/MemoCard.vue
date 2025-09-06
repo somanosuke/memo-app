@@ -23,14 +23,19 @@ const isHover = ref(false);
 
 <template>
   <div
-    class="component-root bg-white shadow-lg border border-solid border-orange-100 p-6 rounded-xl flex justify-between items-center"
+    class="component-root bg-background shadow-lg border border-solid border-orange-100 p-6 rounded-xl flex justify-between items-center"
     @mouseover="isHover = true"
     @mouseleave="isHover = false"
   >
     <div class="text">
-      <p class="text-lg font-normal whitespace-pre-wrap">{{ props.content }}</p>
-      <p class="text-md font-light text-gray-500">{{ props.timestamp }}</p>
+      <p class="text-lg font-normal text-text whitespace-pre-wrap">{{ props.content }}</p>
+      <p class="text-md font-light text-subtext">{{ props.timestamp }}</p>
     </div>
-    <Trash class="trash-button cursor-pointer" v-if="isHover" @click="deleteMemo" />
+    <Trash
+      class="trash-button text-subtext cursor-pointer"
+      size="18"
+      v-if="isHover"
+      @click="deleteMemo"
+    />
   </div>
 </template>

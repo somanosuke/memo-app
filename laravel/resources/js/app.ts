@@ -1,4 +1,5 @@
 import "../css/app.css";
+import "../css/global.css";
 import { createApp } from "vue";
 import App from "./App.vue";
 import pinia from "./plugins/pinia";
