@@ -21,7 +21,7 @@ async function handleSubmit() {
     class="component-root bg-white shadow-lg border border-solid border-orange-100 max-w-2xl w-[96%] p-6 rounded-xl"
   >
     <div class="flex items-center gap-3">
-      <Plus class="text-primary-500" />
+      <Plus class="text-primary-500" size="24" />
       <p class="font-medium text-lg">新しいメモ</p>
     </div>
     <form @submit.prevent="handleSubmit">
@@ -35,11 +35,11 @@ async function handleSubmit() {
         @keydown.enter.prevent="$event.shiftKey ? (content += '\n') : handleSubmit()"
       ></textarea>
       <button
-        class="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-orange-500 to-red-500 rounded-xl mt-4 p-3 disabled:cursor-not-allowed disabled:bg-gradient-to-r disabled:from-orange-200 disabled:to-red-200"
+        class="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-orange-500 to-red-500 rounded-xl mt-4 p-3 disabled:cursor-not-allowed disabled:opacity-40"
         :disabled="content.trim().length === 0"
       >
         <!--trim()で改行を削除することで改行のみでは送信できない-->
-        <Plus class="text-white" />
+        <Plus class="text-white" size="24" />
         <p class="text-white font-medium text-lg">メモを保存</p>
       </button>
     </form>

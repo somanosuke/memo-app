@@ -1,3 +1,8 @@
+<script lang="ts" setup>
+defineProps<{
+  size: number;
+}>();
+</script>
 <template>
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -7,7 +12,9 @@
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
-    class="lucide lucide-sticky-note w-full h-full"
+    :width="size"
+    :height="size"
+    class="lucide lucide-sticky-note"
   >
     <path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8Z"></path>
     <path d="M15 3v4a2 2 0 0 0 2 2h4"></path>
