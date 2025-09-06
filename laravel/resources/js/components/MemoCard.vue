@@ -19,6 +19,13 @@ async function deleteMemo() {
 }
 
 const isHover = ref(false);
+const isExpanded = ref(false); //省略表示判定
+function toggleExpanded() {
+  const selection = window.getSelection();
+  if (!selection || selection.toString().length === 0) {
+    isExpanded.value = !isExpanded.value;
+  }
+}
 </script>
 
 <template>
@@ -26,18 +33,22 @@ const isHover = ref(false);
     class="component-root bg-background shadow-lg border border-solid border-orange-100 p-6 rounded-xl flex justify-between items-center"
     @mouseover="isHover = true"
     @mouseleave="isHover = false"
+    @click="toggleExpanded"
   >
     <div class="text flex-1 max-w-[94%]">
-      <p class="text-lg font-normal text-text whitespace-pre-wrap max-w-full break-all">
-        {{ props.content }}
+      <p
+        class="text-lg font-normal text-text whitespace-pre-wrap max-w-full break-all line-clamp-2"
+        :class="{ 'line-clamp-none': isExpanded }"
+      >
+        {{ content }}
       </p>
-      <p class="text-md font-light text-subtext">{{ props.timestamp }}</p>
+      <p class="text-md font-light text-subtext">{{ timestamp }}</p>
     </div>
     <Trash
       class="trash-button text-subtext cursor-pointer"
       size="18"
       v-if="isHover"
-      @click="deleteMemo"
+      @click.stop="deleteMemo"
     />
   </div>
 </template>
