@@ -10,10 +10,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('memos', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->text('content');
-            $table->foreignId('user_id')->nullable();//NULL許可、ログイン機能実装後消す。
+            $table->ulid('ULID')->unique();
+            $table->string('display_id')->unique();
+            $table->string('name');
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -23,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('memos');
+        Schema::dropIfExists('users');
     }
 };
