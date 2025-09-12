@@ -42,12 +42,13 @@ class AuthController extends Controller
     {
         $validated = $request->validated();
 
-        User::create([
+        $user = User::create([
             'ULID' => (string)Str::ulid(),
             'name' => $validated['name'],
             'password' => Hash::make($validated['password']),
             'display_id' => $validated['display_id'],
         ]);
+        Auth::login($user);
         return response()->json([//成功を返す
             'message' => 'Created successfully :)'
         ], 200);
