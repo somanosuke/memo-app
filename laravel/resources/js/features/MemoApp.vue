@@ -4,10 +4,13 @@ import Textarea from "../components/TextareaForm.vue";
 import Bottom from "../components/Bottom.vue";
 import MemoList from "../features/MemoList.vue";
 import DarkToggle from "../components/darkModeToggle.vue";
+import User from "../components/UserData.vue";
 import { ref, onMounted } from "vue";
 import api from "@/bootstrap";
+import axios from "axios";
 
 const memos = ref([]);
+const currentUser = ref("");
 
 async function getMemos() {
   const res = await api.get("/app/getMemos");
@@ -27,6 +30,7 @@ onMounted(() => {
     <div class="max-w-2xl w-[96%] flex justify-end">
       <DarkToggle />
     </div>
+    <User />
     <Textarea @updated="getMemos" />
     <MemoList :memos="memos" @updated="getMemos" />
     <Bottom />
