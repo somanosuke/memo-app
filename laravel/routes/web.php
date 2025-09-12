@@ -21,3 +21,4 @@ Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/tryLogin', [AuthController::class, 'login']);
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::get('/getCurrentUser', [AuthController::class, 'getCurrentUser']);
+Route::post('/logout', [AuthController::class, 'logout']);

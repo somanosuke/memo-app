@@ -9,6 +9,7 @@ axios.defaults.headers.common["X-CSRF-TOKEN"] =
 async function getCurrentUser() {
   const res = await axios.get("/getCurrentUser");
   currentUser.value = res.data;
+  console.log("currentUser", res.data);
 }
 
 onMounted(() => {
@@ -17,8 +18,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <p class="text-text">
-    <span class="font-bold text-lg">{{ currentUser.name }}</span
-    >( @{{ currentUser.display_id }} )でログイン中
-  </p>
+  <div class="component-root">
+    <p class="text-text" v-if="Object.keys(currentUser).length !== 0">
+      <span class="font-bold text-lg">{{ currentUser.name }}</span
+      >( @{{ currentUser.display_id }} )でログイン中
+    </p>
+    <p v-else class="text-text">ログインしていません。</p>
+  </div>
 </template>
