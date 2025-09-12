@@ -9,7 +9,12 @@ axios.defaults.headers.common["X-CSRF-TOKEN"] =
 async function getCurrentUser() {
   const res = await axios.get("/getCurrentUser");
   currentUser.value = res.data;
-  console.log("currentUser", res.data);
+}
+
+async function handleLogout() {
+  const res = await axios.post("/logout");
+  window.location.reload();
+  console.log(res.data);
 }
 
 onMounted(() => {
@@ -19,10 +24,27 @@ onMounted(() => {
 
 <template>
   <div class="component-root">
-    <p class="text-text" v-if="Object.keys(currentUser).length !== 0">
-      <span class="font-bold text-lg">{{ currentUser.name }}</span
-      >( @{{ currentUser.display_id }} )でログイン中
-    </p>
-    <p v-else class="text-text">ログインしていません。</p>
+    <div class="status">
+      <p class="text-text" v-if="Object.keys(currentUser).length !== 0">
+        <span class="font-bold text-lg">{{ currentUser.name }}</span
+        >( @{{ currentUser.display_id }} )でログイン中
+      </p>
+      <p v-else class="text-text">ログインしていません。</p>
+    </div>
+    <div class="buttons">
+      <div
+        v-if="Object.keys(currentUser).length !== 0"
+        @click="handleLogout"
+        class="text-text text-lg px-4 py-2 w-fit bg-background rounded-md text-center cursor-pointer shadow-md mt-2"
+      >
+        ログアウト
+      </div>
+      <div
+        v-else
+        class="text-text text-lg px-4 py-2 w-fit bg-background rounded-md text-center cursor-pointer shadow-md mt-2"
+      >
+        <a href="/login">ログイン/サインアップ</a>
+      </div>
+    </div>
   </div>
 </template>
