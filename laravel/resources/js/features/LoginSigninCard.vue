@@ -7,7 +7,7 @@ const formType = ref("Login");
 </script>
 <template>
   <div
-    class="component-root bg-background shadow-lg border border-solid border-orange-100 h-[500px] max-w-2xl w-[96%] py-10 px-10 rounded-xl overflow-hidden"
+    class="component-root bg-background shadow-lg border border-solid border-orange-100 min-h-[500px] max-w-2xl w-[96%] py-10 px-10 rounded-xl overflow-hidden"
   >
     <div
       class="mx-auto w-[80%] overflow-hidden border-text border-b-[1.5px] pb-2 justify-center gap-[20%] flex mb-8 [&>p]:transition [&>p]:duration-300 [&>p]:ease-in-out"

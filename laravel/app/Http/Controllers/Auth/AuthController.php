@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\SignupRequest;
 
 class AuthController extends Controller
 {
@@ -32,6 +36,21 @@ class AuthController extends Controller
         return response()->json([
             'message' => '認証失敗'
         ], 422);
+    }
+
+    public function signup(SignupRequest $request)
+    {
+        $validated = $request->validated();
+
+        User::create([
+            'ULID' => (string)Str::ulid(),
+            'name' => $validated['name'],
+            'password' => Hash::make($validated['password']),
+            'display_id' => $validated['display_id'],
+        ]);
+        return response()->json([//成功を返す
+            'message' => 'Created successfully :)'
+        ], 200);
     }
 
     public function getCurrentUser()

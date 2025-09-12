@@ -19,4 +19,5 @@ Route::get('/app', function () {
 })->name('memo');
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/tryLogin', [AuthController::class, 'login']);
+Route::post('/signup', [AuthController::class, 'signup']);
 Route::get('/getCurrentUser', [AuthController::class, 'getCurrentUser']);

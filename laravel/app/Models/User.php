@@ -12,7 +12,9 @@ class User extends Authenticatable
     use HasFactory;
 
     protected $fillable = [
+        'ULID',
         'name',
+        'display_id',
         'password',
     ];
     protected $hidden = [
