@@ -25,7 +25,7 @@ class SignupRequest extends FormRequest
         return [
             'name' => ['required'],
             'display_id' => ['required', 'alpha_num', 'unique:users,display_id'],
-            'password' => ['required', Password::min(8)->letters()->numbers()],
+            'password' => ['required', Password::min(12)->letters()->numbers()],
         ];
     }
 
@@ -37,7 +37,7 @@ class SignupRequest extends FormRequest
             'display_id.alpha_num' => 'IDは半角英数字で入力してください',
             'display_id.unique' => 'このIDは既に使われています',
             'password.required' => 'パスワードが入力されていません',
-            'password.min' => 'パスワードは8文字以上で入力してください',
+            'password.min' => 'パスワードは12文字以上で入力してください',
             'password.letters' => 'パスワードには英字を1文字以上含んでください',
             'password.numbers' => 'パスワードには数字を1文字以上含んでください',
         ];
