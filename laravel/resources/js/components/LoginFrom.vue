@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import api from "@/bootstrap.ts";
+import axios from "axios";
 import { ref } from "vue";
 
 const display_id = ref("");

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\SignupRequest;
+use App\Http\Requests\LoginRequest;
 
 class AuthController extends Controller
 {
@@ -18,12 +19,9 @@ class AuthController extends Controller
         return view('login.index');
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $credentials = $request->validate([
-            'display_id' => ['required', 'alpha_num'],
-            'password' => ['required'],
-        ]);
+        $credentials = $request->validated();
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -55,6 +53,7 @@ class AuthController extends Controller
 
     public function logout()
     {
+        session()->invalidate();
         Auth::logout();
         return response()->json([
             'message' => 'Logged out successfully :)'
