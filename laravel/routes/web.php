@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\MemoController;
 use Illuminate\Support\Facades\Route;
 
 /**********************************************************************
@@ -20,5 +21,8 @@ Route::get('/app', function () {
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/tryLogin', [AuthController::class, 'login']);
 Route::post('/signup', [AuthController::class, 'signup']);
+Route::post('/app/store', [MemoController::class, 'store']);
 Route::get('/getCurrentUser', [AuthController::class, 'getCurrentUser']);
 Route::post('/logout', [AuthController::class, 'logout']);
+Route::get('/app/getMemos', [MemoController::class, 'getMemos']);
+Route::post('/app/delete', [MemoController::class, 'delete']);
