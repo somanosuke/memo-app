@@ -2,15 +2,22 @@
 import { ref } from "vue";
 import Plus from "./svgs/PlusSvg.vue";
 import api from "@/bootstrap";
+import axios from "axios";
 
 const content = ref("");
 const emit = defineEmits(["updated"]);
 
 async function handleSubmit() {
-  // 非同期で POST
-  await api.post("/app/store", { content: content.value }).then((res) => {
-    console.log(res.data.message);
-  });
+  const currentUserData = await axios.get("/getCurrentUser");
+  console.log(currentUserData.data.ULID);
+  await api
+    .post("/app/store", {
+      content: content.value,
+      user_ULID: currentUserData.data.ULID,
+    })
+    .then((res) => {
+      console.log(res.data.message);
+    });
   content.value = "";
   emit("updated");
 }

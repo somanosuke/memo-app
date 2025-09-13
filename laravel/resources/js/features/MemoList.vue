@@ -32,9 +32,11 @@ const reversedMemos = computed(() => {
       <MemoCard
         v-for="memo in reversedMemos"
         :key="memo.id"
+        :id="memo.id"
         :content="memo.content"
         :timestamp="memo.timestamp"
-        :id="memo.id"
+        :name="memo.user_name"
+        :display_id="memo.user_display_id"
         @updated="$emit('updated')"
       />
     </transition-group>

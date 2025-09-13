@@ -13,7 +13,8 @@ return new class extends Migration {
         Schema::create('memos', function (Blueprint $table) {
             $table->id();
             $table->text('content');
-            $table->foreignId('user_id')->nullable();//NULL許可、ログイン機能実装後消す。
+            $table->char('user_ULID', 26)->nullable();
+            $table->foreign('user_ULID')->references('ULID')->on('users')->onDelete('set null');//NULL許可、ログイン機能実装後消す
             $table->timestamps();
         });
     }
