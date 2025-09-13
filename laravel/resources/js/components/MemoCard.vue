@@ -7,6 +7,8 @@ const props = defineProps<{
   id: number;
   content: string;
   timestamp: string;
+  name: string;
+  display_id: string;
 }>();
 const { id, content, timestamp } = props;
 const emit = defineEmits(["updated"]);
@@ -42,7 +44,13 @@ function toggleExpanded() {
       >
         {{ content }}
       </p>
-      <p class="text-md font-light text-subtext">{{ timestamp }}</p>
+      <div class="info flex text-md font-light text-subtext gap-4">
+        <p>{{ timestamp }}</p>
+        <p>
+          Noted by <span class="text-text font-normal">{{ name }}</span
+          >(@{{ display_id }})
+        </p>
+      </div>
     </div>
     <Trash
       class="trash-button text-subtext cursor-pointer"
