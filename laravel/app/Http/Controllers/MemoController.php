@@ -34,7 +34,7 @@ class MemoController extends Controller
                 'content' => $memo->content,
                 'user_name' => $user->name,
                 'user_display_id' => $user->display_id,
-                'timestamp' => $memo->created_at->timezone('Asia/Tokyo')->format('Y/m/d H:i:s'),
+                'timestamp' => $memo->created_at->format('Y/m/d H:i:s'),
             ];
         });
         return response()->json($memos);
