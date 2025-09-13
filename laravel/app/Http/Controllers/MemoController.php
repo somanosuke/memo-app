@@ -21,7 +21,7 @@ class MemoController extends Controller
 
         return response()->json([//成功を返す
             'message' => 'Created successfully :)'
-        ], 200);
+        ], 201);
     }
 
     public function getMemos()

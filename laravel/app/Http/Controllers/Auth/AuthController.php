@@ -28,8 +28,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return response()->json([
-                'message' => 'ログイン成功',
-                'user' => Auth::user()
+                'message' => 'Logged in successfully :)',
             ]);
         }
 
@@ -51,7 +50,7 @@ class AuthController extends Controller
         Auth::login($user);
         return response()->json([//成功を返す
             'message' => 'Created successfully :)'
-        ], 200);
+        ], 201);
     }
 
     public function logout()
