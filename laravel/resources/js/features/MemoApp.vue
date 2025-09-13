@@ -13,7 +13,7 @@ const memos = ref([]);
 const currentUser = ref("");
 
 async function getMemos() {
-  const res = await api.get("/app/getMemos");
+  const res = await axios.get("/app/getMemos");
   memos.value = res.data;
 }
 

@@ -9,8 +9,7 @@ const emit = defineEmits(["updated"]);
 
 async function handleSubmit() {
   const currentUserData = await axios.get("/getCurrentUser");
-  console.log(currentUserData.data.ULID);
-  await api
+  await axios
     .post("/app/store", {
       content: content.value,
       user_ULID: currentUserData.data.ULID,

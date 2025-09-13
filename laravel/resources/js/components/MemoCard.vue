@@ -2,6 +2,7 @@
 import Trash from "./svgs/TrashSvg.vue";
 import { ref } from "vue";
 import api from "@/bootstrap.ts";
+import axios from "axios";
 
 const props = defineProps<{
   id: number;
@@ -14,7 +15,7 @@ const { id, content, timestamp } = props;
 const emit = defineEmits(["updated"]);
 
 async function deleteMemo() {
-  await api.post("/app/delete", { id: id }).then((res) => {
+  await axios.post("/app/delete", { id: id }).then((res) => {
     console.log(res.data.message);
   });
   emit("updated");
