@@ -15,6 +15,7 @@ class MemoController extends Controller
 
         Memo::create([
             'content' => $validated['content'],
+            'user_ULID' => $validated['user_ULID'],
         ]);
 
         return response()->json([//成功を返す
