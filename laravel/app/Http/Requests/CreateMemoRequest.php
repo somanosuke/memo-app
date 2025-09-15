@@ -23,7 +23,6 @@ class CreateMemoRequest extends FormRequest
     {
         return [
             'content' => 'required',
-            'user_ULID' => ['required', 'exists:users,ULID'],
         ];
     }
 }
