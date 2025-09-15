@@ -16,7 +16,7 @@ Route::get('/', function () {
     return view('index');
 });
 Route::get('/app', function () {
-    return view('app');
+    return view('index');
 })->name('memo');
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/tryLogin', [AuthController::class, 'login']);
