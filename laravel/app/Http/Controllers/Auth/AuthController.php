@@ -40,7 +40,6 @@ class AuthController extends Controller
         $validated = $request->validated();
 
         $user = User::create([
-            'ULID' => (string)Str::ulid(),
             'name' => $validated['name'],
             'password' => Hash::make($validated['password']),
             'display_id' => $validated['display_id'],
