@@ -11,7 +11,6 @@ class Memo extends Model
     //可変項目
     protected $fillable = [
         'content',
-        'user_ULID',
     ];
 
     public function user()

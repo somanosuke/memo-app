@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ref } from "vue";
+import axios from "axios";
 
 const userName = ref("");
 const display_id = ref("");

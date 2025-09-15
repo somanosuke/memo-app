@@ -14,9 +14,8 @@ class MemoController extends Controller
     {
         $validated = $request->validated();
 
-        Memo::create([
+        auth()->user()->memos()->create([
             'content' => $validated['content'],
-            'user_ULID' => $validated['user_ULID'],
         ]);
 
         return response()->json([//成功を返す
@@ -26,15 +25,13 @@ class MemoController extends Controller
 
     public function getMemos()
     {
-        $memos = Memo::all()->map(function ($memo) {
-            $user_ULID = $memo->user_ULID;
-            $user = User::where('ULID', $user_ULID)->first();
+        $memos = Memo::with('user')->get()->map(function ($memo) {
             return [
                 'id' => $memo->id,
                 'content' => $memo->content,
-                'user_name' => $user->name,
-                'user_display_id' => $user->display_id,
-                'timestamp' => $memo->created_at->timezone('Asia/Tokyo')->format('Y/m/d H:i:s'),
+                'user_name' => $memo->user->name,
+                'user_display_id' => $memo->user->display_id,
+                'timestamp' => $memo->created_at->format('Y/m/d H:i:s'),
             ];
         });
         return response()->json($memos);

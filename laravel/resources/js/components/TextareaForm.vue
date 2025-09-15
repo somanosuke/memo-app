@@ -12,7 +12,6 @@ async function handleSubmit() {
   await axios
     .post("/app/store", {
       content: content.value,
-      user_ULID: currentUserData.data.ULID,
     })
     .then((res) => {
       console.log(res.data.message);
