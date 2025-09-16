@@ -45,7 +45,7 @@ class AuthController extends Controller
             'display_id' => $validated['display_id'],
         ]);
         Auth::login($user);
-        return response()->json([//成功を返す
+        return response()->json([
             'message' => 'Created successfully :)'
         ], 201);
     }

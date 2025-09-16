@@ -18,7 +18,7 @@ class MemoController extends Controller
             'content' => $validated['content'],
         ]);
 
-        return response()->json([//成功を返す
+        return response()->json([
             'message' => 'Created successfully :)'
         ], 201);
     }
@@ -38,11 +38,17 @@ class MemoController extends Controller
     }
 
     public function delete(Request $request)
-    {
+    {//メモの著者のみ削除可能
         $memo = Memo::find($request['id']);
-        $memo->delete();
-        return response()->json([
-            'message' => 'Deleted successfully :)'
-        ], 200);
+        if (auth()->id() == $memo->user_id) {
+            $memo->delete();
+            return response()->json([
+                'message' => 'Deleted successfully :)'
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Deletion failed :('
+            ], 401);
+        }
     }
 }

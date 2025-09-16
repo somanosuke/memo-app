@@ -1,14 +1,22 @@
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
+import { useCurrentUserStore } from "../stores/currentuser.js";
 import axios from "axios";
 
-const currentUser = ref("");
+const currentUserStore = useCurrentUserStore();
+const currentUser = ref({
+  display_id: null,
+  name: null,
+});
 axios.defaults.headers.common["X-CSRF-TOKEN"] =
   document.querySelector('meta[name="csrf-token"]').content;
 
 async function getCurrentUser() {
   const res = await axios.get("/getCurrentUser");
-  currentUser.value = res.data;
+  currentUserStore.updateCurrentUser(res.data.display_id, res.data.name);
+  currentUser.value.display_id = res.data.display_id;
+  currentUser.value.name = res.data.name;
+  console.log(currentUser.value);
 }
 
 async function handleLogout() {
@@ -25,7 +33,7 @@ onMounted(() => {
 <template>
   <div class="component-root">
     <div class="status">
-      <p class="text-text" v-if="Object.keys(currentUser).length !== 0">
+      <p class="text-text" v-if="currentUser.display_id !== undefined">
         <span class="font-bold text-lg">{{ currentUser.name }}</span
         >( @{{ currentUser.display_id }} )でログイン中
       </p>
@@ -33,7 +41,7 @@ onMounted(() => {
     </div>
     <div class="buttons">
       <div
-        v-if="Object.keys(currentUser).length !== 0"
+        v-if="currentUser.display_id !== undefined"
         @click="handleLogout"
         class="text-text text-lg px-4 py-2 w-fit bg-background rounded-md text-center cursor-pointer shadow-md mt-2"
       >
