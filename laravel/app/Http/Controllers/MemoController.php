@@ -40,9 +40,15 @@ class MemoController extends Controller
     public function delete(Request $request)
     {
         $memo = Memo::find($request['id']);
-        $memo->delete();
-        return response()->json([
-            'message' => 'Deleted successfully :)'
-        ], 200);
+        if (auth()->id() == $memo->user_id) {
+            $memo->delete();
+            return response()->json([
+                'message' => 'Deleted successfully :)'
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Deletion failed :('
+            ], 401);
+        }
     }
 }

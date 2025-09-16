@@ -3,6 +3,7 @@ import Trash from "./svgs/TrashSvg.vue";
 import { ref } from "vue";
 import api from "@/bootstrap.ts";
 import axios from "axios";
+import { useCurrentUserStore } from "../stores/currentuser.js";
 
 const props = defineProps<{
   id: number;
@@ -13,6 +14,7 @@ const props = defineProps<{
 }>();
 const { id, content, timestamp } = props;
 const emit = defineEmits(["updated"]);
+const currentUserStore = useCurrentUserStore();
 
 async function deleteMemo() {
   await axios.post("/app/delete", { id: id }).then((res) => {
@@ -56,7 +58,7 @@ function toggleExpanded() {
     <Trash
       class="trash-button text-subtext cursor-pointer"
       size="18"
-      v-if="isHover"
+      v-if="isHover && currentUserStore.getCurrentUserId === display_id"
       @click.stop="deleteMemo"
     />
   </div>
