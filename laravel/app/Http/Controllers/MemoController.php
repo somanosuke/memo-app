@@ -38,7 +38,7 @@ class MemoController extends Controller
     }
 
     public function delete(Request $request)
-    {
+    {//メモの著者のみ削除可能
         $memo = Memo::find($request['id']);
         if (auth()->id() == $memo->user_id) {
             $memo->delete();
