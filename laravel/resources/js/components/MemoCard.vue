@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import Trash from "./svgs/TrashSvg.vue";
 import Pen from "./svgs/PenSvg.vue";
-import { ref } from "vue";
+import { ref, nextTick } from "vue";
 import api from "@/bootstrap.ts";
 import axios from "axios";
 import { useCurrentUserStore } from "../stores/currentuser.js";
@@ -16,6 +16,7 @@ const props = defineProps<{
 const { id, content, timestamp } = props;
 const emit = defineEmits(["updated"]);
 const currentUserStore = useCurrentUserStore();
+const editTextarea = ref();
 const edit = ref({
   isEditing: false,
   row: 0,
@@ -29,11 +30,12 @@ async function deleteMemo() {
   emit("updated");
 }
 
-function editMemo() {
+async function editMemo() {
   edit.value.isEditing = true;
   edit.value.row = props.content.split("\n").length;
   edit.value.editContent = props.content;
-  console.log(edit.value.row);
+  await nextTick(); //v-ifを使っているため描画待ちをする
+  editTextarea.value.focus();
 }
 
 const isHover = ref(false);
@@ -66,6 +68,7 @@ function toggleExpanded() {
           v-else
           name=""
           id=""
+          ref="editTextarea"
           class="resize-none w-full leading-[1.75rem] p-3 mt-4 border border-gray-300 rounded-md outline-sky-200 dark:text-zinc-300 dark:bg-zinc-700 dark:outline-sky-900"
           :rows="edit.row"
           v-model="edit.editContent"
