@@ -18,7 +18,7 @@ class MemoController extends Controller
             'content' => $validated['content'],
         ]);
 
-        return response()->json([//成功を返す
+        return response()->json([
             'message' => 'Created successfully :)'
         ], 201);
     }
