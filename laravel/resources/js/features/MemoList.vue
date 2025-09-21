@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import MemoCard from "@/components/MemoCard.vue";
 import MemoIcon from "../components/svgs/DocumentSvg.vue";
-import { computed } from "vue";
+import { computed, toRef } from "vue";
 
 interface Memo {
   id: number;
@@ -9,10 +9,8 @@ interface Memo {
   timestamp: string;
 } // defineProps に型だけ指定する
 const props = defineProps<{ memos: Memo[] }>();
-
-const reversedMemos = computed(() => {
-  return props.memos.slice().reverse();
-});
+const memosRef = toRef(props, "memos");
+const reversedMemos = computed(() => [...memosRef.value].reverse());
 </script>
 
 <template>
