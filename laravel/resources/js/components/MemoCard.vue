@@ -13,7 +13,6 @@ const props = defineProps<{
   name: string;
   display_id: string;
 }>();
-const { id, content, timestamp } = props;
 const emit = defineEmits(["updated"]);
 const currentUserStore = useCurrentUserStore();
 const editTextarea = ref();
@@ -24,7 +23,7 @@ const edit = ref({
 });
 
 async function deleteMemo() {
-  await axios.post("/app/delete", { id: id }).then((res) => {
+  await axios.post("/app/delete", { id: props.id }).then((res) => {
     console.log(res.data.message);
   });
   emit("updated");
@@ -36,6 +35,14 @@ async function editMemo() {
   edit.value.editContent = props.content;
   await nextTick(); //v-ifを使っているため描画待ちをする
   editTextarea.value.focus();
+}
+
+async function handleEditSubmit() {
+  await axios.put(`/app/${props.id}`, { content: edit.value.editContent }).then((res) => {
+    console.log(res.data.message);
+  });
+  emit("updated");
+  edit.value.isEditing = false;
 }
 
 const isHover = ref(false);
@@ -72,6 +79,7 @@ function toggleExpanded() {
           class="resize-none w-full leading-[1.75rem] p-3 mt-4 border border-gray-300 rounded-md outline-sky-200 dark:text-zinc-300 dark:bg-zinc-700 dark:outline-sky-900"
           :rows="edit.row"
           v-model="edit.editContent"
+          @keydown.enter.prevent="$event.shiftKey ? (edit.editContent += '\n') : handleEditSubmit()"
         ></textarea>
       </div>
       <div class="info flex text-md font-light text-subtext gap-4">

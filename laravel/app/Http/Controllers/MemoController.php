@@ -37,6 +37,21 @@ class MemoController extends Controller
         return response()->json($memos);
     }
 
+    public function edit(CreateMemoRequest $request, $id)
+    {
+        $validated = $request->validated();
+        $memo = Memo::findOrFail($id);
+
+        if ($memo->user_id == auth()->id()) {
+            $memo->update([
+                'content' => $validated['content'],
+            ]);
+            return response()->json([
+                'message' => 'Edited successfully :)'
+            ]);
+        }
+    }
+
     public function delete(Request $request)
     {//メモの著者のみ削除可能
         $memo = Memo::find($request['id']);

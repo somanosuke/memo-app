@@ -26,3 +26,4 @@ Route::get('/getCurrentUser', [AuthController::class, 'getCurrentUser']);
 Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/app/getMemos', [MemoController::class, 'getMemos']);
 Route::post('/app/delete', [MemoController::class, 'delete']);
+Route::put('/app/{id}', [MemoController::class, 'edit']);
