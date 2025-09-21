@@ -80,6 +80,7 @@ function toggleExpanded() {
           :rows="edit.row"
           v-model="edit.editContent"
           @keydown.enter.prevent="$event.shiftKey ? (edit.editContent += '\n') : handleEditSubmit()"
+          @keydown.esc="edit.isEditing = false"
         ></textarea>
       </div>
       <div class="info flex text-md font-light text-subtext gap-4">
